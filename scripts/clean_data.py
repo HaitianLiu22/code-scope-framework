@@ -3,7 +3,6 @@ import warnings
 import numpy as np
 
 from pathlib import Path
-from pprint import pprint
 from datasets import load_dataset
 
 
@@ -34,13 +33,13 @@ def update_metrics(example):
 def main():
     load_data_name_list = [
         'code_summarization_data.jsonl',
-        # 'code_smell_data.jsonl',
-        # 'code_review_data.jsonl',
-        # 'automated_testing_data.jsonl',
-        # 'program_synthesis_data.jsonl',
-        # 'code_translation_data.jsonl',
-        # 'code_repair_data.jsonl',
-        # 'code_optimization_data.jsonl'
+        'code_smell_data.jsonl',
+        'code_review_data.jsonl',
+        'automated_testing_data.jsonl',
+        'program_synthesis_data.jsonl',
+        'code_translation_data.jsonl',
+        'code_repair_data.jsonl',
+        'code_optimization_data.jsonl'
     ]
 
     lang_cluster_mapping = {
@@ -66,7 +65,6 @@ def main():
         dataset = load_dataset('json', split='train', data_files=str(load_data_path))
         dataset.cleanup_cache_files()
         print(dataset)
-        pprint(dataset[0])
 
         if load_data_name == 'code_summarization_data.jsonl':
             code_uid_list = [str(uuid.uuid4()).replace('-', '') for _ in range(len(dataset))]
@@ -113,6 +111,8 @@ def main():
             dataset = dataset.remove_columns('input_from')
             dataset = dataset.remove_columns('output_to')
             dataset = dataset.remove_columns('tokens')
+            dataset = dataset.rename_column('input_spec', 'input_specification')
+            dataset = dataset.rename_column('output_spec', 'output_specification')
             dataset = dataset.rename_column('ground_truth', 'human_solution')
             dataset = dataset.map(lambda example: {'lang_cluster': lang_cluster_mapping[example['lang_cluster']]})
             dataset = dataset.map(update_testcases)
@@ -132,6 +132,9 @@ def main():
             dataset = dataset.remove_columns('input_from')
             dataset = dataset.remove_columns('output_to')
             dataset = dataset.remove_columns('tokens')
+            dataset = dataset.rename_column('input_spec', 'input_specification')
+            dataset = dataset.rename_column('output_spec', 'output_specification')
+            dataset = dataset.rename_column('exec_outcome', 'execute_outcome')
             dataset = dataset.rename_column('ground_truth', 'human_solution')
             dataset = dataset.map(lambda example: {'lang_cluster': lang_cluster_mapping[example['lang_cluster']]})
             dataset = dataset.map(update_testcases)
@@ -141,11 +144,11 @@ def main():
             dataset = dataset.rename_column('mem_baseline_perf', 'memory_baseline_perf')
             dataset = dataset.rename_column('time_baseline_code', 'time_baseline_source_code')
             dataset = dataset.rename_column('task_description', 'description')
+            dataset = dataset.rename_column('memory_baseline_perf', 'memory_baseline_performance')
+            dataset = dataset.rename_column('time_baseline_perf', 'time_baseline_performance')
             dataset = dataset.map(update_testcases)
 
         print(dataset)
-        pprint(dataset[0])
-
         dataset.to_json(str(save_data_path), lines=True)
 
 

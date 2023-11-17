@@ -116,6 +116,24 @@ def code_repair():  # TODO code repair名字都错了
 
 
 def code_testing():
+    cs = load_dataset('json', split='train', data_files='code_review_data.jsonl')
+    gt = load_dataset('json', split='train', data_files='code_review_eval_human.jsonl')
+    print(cs)
+    print(gt)
+
+    cs = cs.add_column('diff_tag', gt['diff_tag'])
+    cs = cs.add_column('review_comment', gt['review_comment'])
+    cs.to_json(str('code_review_data.jsonl'), lines=True)
+
+    cs_code_uid = cs['code_uid']
+    gt_code_uid = gt['code_uid']
+
+    print(gt_code_uid == cs_code_uid)
+    print(gt_code_uid[0])
+    print(cs_code_uid[0])
+
+    sys.exit()
+
     # gt = load_dataset('json', split='train', data_files='./raw/automated_testing_data.jsonl')
     # hh = load_dataset('json', split='train', data_files='./automated_testing_data.jsonl')
     # print(gt)
