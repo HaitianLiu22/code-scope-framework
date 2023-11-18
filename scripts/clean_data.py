@@ -1,3 +1,4 @@
+import sys
 import uuid
 import warnings
 import numpy as np
@@ -59,16 +60,32 @@ def main():
         'rust': 'Rust'
     }
 
-    for load_data_name in load_data_name_list:
+    length_mapping = {
+        'code_summarization_data.jsonl': 4841,
+        'code_smell_data.jsonl': 200,
+        'code_review_data.jsonl': 900,
+        'automated_testing_data.jsonl': 400,
+        'program_synthesis_data.jsonl': 803,
+        'code_translation_data.jsonl': 5382,
+        'code_repair_data.jsonl': 746,
+        'code_optimization_data.jsonl': 121
+    }
+
+    previous_length_list = []
+    for index, load_data_name in enumerate(load_data_name_list):
         load_data_path = Path(__file__).parent.parent / Path('raw') / Path(load_data_name)
         save_data_path = Path(__file__).parent.parent / Path('data') / Path(load_data_name)
         dataset = load_dataset('json', split='train', data_files=str(load_data_path))
         dataset.cleanup_cache_files()
         print(dataset)
 
+        if index != 0:
+            previous_length_list.append(length_mapping[load_data_name_list[index - 1]])
+        current_length = length_mapping[load_data_name]
+        id_list = [_ + 1 for _ in range(np.sum(previous_length_list).astype(int), np.sum(previous_length_list).astype(int) + current_length)]
+        dataset = dataset.add_column('id', id_list)
+
         if load_data_name == 'code_summarization_data.jsonl':
-            code_uid_list = [str(uuid.uuid4()).replace('-', '') for _ in range(len(dataset))]
-            dataset = dataset.add_column('code_uid', code_uid_list)
             dataset = dataset.remove_columns('task_name')
             dataset = dataset.remove_columns('task_url')
             dataset = dataset.remove_columns('task_cat')
@@ -78,14 +95,17 @@ def main():
             dataset = dataset.rename_column('code', 'source_code')
             dataset = dataset.rename_column('code_sum_groundtruth', 'human_summarization')
         elif load_data_name == 'code_smell_data.jsonl':
+            dataset = dataset.remove_columns('code_uid')
             dataset = dataset.remove_columns('difficulty')
             dataset = dataset.remove_columns('start_line')
             dataset = dataset.remove_columns('end_line')
             dataset = dataset.remove_columns('length')
         elif load_data_name == 'code_review_data.jsonl':
+            dataset = dataset.remove_columns('code_uid')
             dataset = dataset.remove_columns('length')
             dataset = dataset.rename_column('old_code', 'source_code')
         elif load_data_name == 'automated_testing_data.jsonl':
+            dataset = dataset.remove_columns('code_uid')
             dataset = dataset.remove_columns('prob_desc_memory_limit')
             dataset = dataset.remove_columns('difficulty')
             dataset = dataset.remove_columns('prob_desc_time_limit')
@@ -106,8 +126,6 @@ def main():
             dataset = dataset.rename_column('branch_coverage', 'human_branch_coverage')
             dataset = dataset.map(update_metrics)
         elif load_data_name == 'program_synthesis_data.jsonl':
-            code_uid_list = [str(uuid.uuid4()).replace('-', '') for _ in range(len(dataset))]
-            dataset = dataset.add_column('code_uid', code_uid_list)
             dataset = dataset.remove_columns('input_from')
             dataset = dataset.remove_columns('output_to')
             dataset = dataset.remove_columns('tokens')
@@ -117,16 +135,12 @@ def main():
             dataset = dataset.map(lambda example: {'lang_cluster': lang_cluster_mapping[example['lang_cluster']]})
             dataset = dataset.map(update_testcases)
         elif load_data_name == 'code_translation_data.jsonl':
-            code_uid_list = [str(uuid.uuid4()).replace('-', '') for _ in range(len(dataset))]
-            dataset = dataset.add_column('code_uid', code_uid_list)
             dataset = dataset.remove_columns('lang')
             dataset = dataset.rename_column('lang_cluster', 'source_lang_cluster')
             dataset = dataset.map(lambda example: {'source_lang_cluster': lang_cluster_mapping[example['source_lang_cluster']]})
             dataset = dataset.map(lambda example: {'target_lang_cluster': lang_cluster_mapping[example['target_lang_cluster']]})
             dataset = dataset.map(update_testcases)
         elif load_data_name == 'code_repair_data.jsonl':
-            code_uid_list = [str(uuid.uuid4()).replace('-', '') for _ in range(len(dataset))]
-            dataset = dataset.add_column('code_uid', code_uid_list)
             dataset = dataset.remove_columns('submission_id')
             dataset = dataset.remove_columns('tags')
             dataset = dataset.remove_columns('input_from')
@@ -139,13 +153,13 @@ def main():
             dataset = dataset.map(lambda example: {'lang_cluster': lang_cluster_mapping[example['lang_cluster']]})
             dataset = dataset.map(update_testcases)
         elif load_data_name == 'code_optimization_data.jsonl':
-            dataset = dataset.rename_column('mem_baseline_code_uid', 'memory_baseline_code_uid')
+            dataset = dataset.remove_columns('mem_baseline_code_uid')
+            dataset = dataset.remove_columns('time_baseline_code_uid')
             dataset = dataset.rename_column('mem_baseline_code', 'memory_baseline_source_code')
-            dataset = dataset.rename_column('mem_baseline_perf', 'memory_baseline_perf')
             dataset = dataset.rename_column('time_baseline_code', 'time_baseline_source_code')
-            dataset = dataset.rename_column('task_description', 'description')
-            dataset = dataset.rename_column('memory_baseline_perf', 'memory_baseline_performance')
+            dataset = dataset.rename_column('mem_baseline_perf', 'memory_baseline_performance')
             dataset = dataset.rename_column('time_baseline_perf', 'time_baseline_performance')
+            dataset = dataset.rename_column('task_description', 'description')
             dataset = dataset.map(update_testcases)
 
         print(dataset)
