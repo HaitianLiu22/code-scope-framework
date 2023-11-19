@@ -12,9 +12,14 @@ def main():
     smell_list = ['large class', 'long method', 'data class', 'blob', 'feature envy', '']
 
     load_result_name_list = [
+        'code_smell_result_codellama.jsonl',
         'code_smell_result_gpt3-5.jsonl',
         'code_smell_result_gpt4.jsonl',
-        'code_smell_result_palm2.jsonl'
+        'code_smell_result_llama2.jsonl',
+        'code_smell_result_palm2.jsonl',
+        'code_smell_result_starcoder.jsonl',
+        'code_smell_result_vicuna.jsonl',
+        'code_smell_result_wizardcoder.jsonl'
     ]
 
     for load_result_name in load_result_name_list:
