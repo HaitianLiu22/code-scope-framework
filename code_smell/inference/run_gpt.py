@@ -170,7 +170,10 @@ if __name__ == '__main__':
         'gpt-4-32k-0314': 'gpt4'
     }
 
-    log_file_path = Path(__file__).parent / Path('logs') / Path(f'code_smell_log_{model_abbr_mapping[args.model]}.log')
+    log_dir = Path(__file__).parent / Path('logs')
+    if not log_dir.is_dir():
+        log_dir.mkdir(parents=True, exist_ok=True)
+    log_file_path = log_dir / Path(f'code_smell_log_{model_abbr_mapping[args.model]}.log')
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     formatter = logging.Formatter(fmt='%(asctime)s - %(filename)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')

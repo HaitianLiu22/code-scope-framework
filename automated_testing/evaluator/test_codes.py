@@ -12,14 +12,14 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--result_name', default='automated_testing_result_palm2.jsonl',
                         choices=[
-                            '',
-                            '',
-                            '',
-                            '',
-                            '',
-                            ''
-                            '',
-                            ''
+                            'automated_testing_result_codellama.jsonl',
+                            'automated_testing_result_gpt3-5.jsonl',
+                            'automated_testing_result_gpt4.jsonl',
+                            'automated_testing_result_llama2.jsonl',
+                            'automated_testing_result_palm2.jsonl',
+                            'automated_testing_result_starcoder.jsonl',
+                            'automated_testing_result_vicuna.jsonl',
+                            'automated_testing_result_wizardcoder.jsonl'
                         ], type=str)
     args = parser.parse_args()
 

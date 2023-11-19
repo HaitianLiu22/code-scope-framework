@@ -164,7 +164,10 @@ def main():
 if __name__ == '__main__':
     args = parse_arguments()
 
-    log_file_path = Path(__file__).parent / Path('logs') / Path('code_review_log_palm2.log')
+    log_dir = Path(__file__).parent / Path('logs')
+    if not log_dir.is_dir():
+        log_dir.mkdir(parents=True, exist_ok=True)
+    log_file_path = log_dir / Path('code_review_log_palm2.log')
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     formatter = logging.Formatter(fmt='%(asctime)s - %(filename)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
