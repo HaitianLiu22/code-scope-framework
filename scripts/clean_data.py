@@ -155,10 +155,10 @@ def main():
         elif load_data_name == 'code_optimization_data.jsonl':
             dataset = dataset.remove_columns('mem_baseline_code_uid')
             dataset = dataset.remove_columns('time_baseline_code_uid')
+            dataset = dataset.remove_columns('mem_baseline_perf')
+            dataset = dataset.remove_columns('time_baseline_perf')
             dataset = dataset.rename_column('mem_baseline_code', 'memory_baseline_source_code')
             dataset = dataset.rename_column('time_baseline_code', 'time_baseline_source_code')
-            dataset = dataset.rename_column('mem_baseline_perf', 'memory_baseline_performance')
-            dataset = dataset.rename_column('time_baseline_perf', 'time_baseline_performance')
             dataset = dataset.rename_column('task_description', 'description')
             dataset = dataset.map(update_testcases)
 

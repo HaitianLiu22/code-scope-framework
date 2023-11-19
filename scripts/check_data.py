@@ -8,14 +8,14 @@ from datasets import load_dataset
 
 def main():
     load_data_name_list = [
-        'code_summarization_data.jsonl',
+        # 'code_summarization_data.jsonl',
         'code_smell_data.jsonl',
-        'code_review_data.jsonl',
-        'automated_testing_data.jsonl',
-        'program_synthesis_data.jsonl',
-        'code_translation_data.jsonl',
-        'code_repair_data.jsonl',
-        'code_optimization_data.jsonl'
+        # 'code_review_data.jsonl',
+        # 'automated_testing_data.jsonl',
+        # 'program_synthesis_data.jsonl',
+        # 'code_translation_data.jsonl',
+        # 'code_repair_data.jsonl',
+        # 'code_optimization_data.jsonl'
     ]
 
     for load_data_name in load_data_name_list:
