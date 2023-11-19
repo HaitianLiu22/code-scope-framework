@@ -142,7 +142,7 @@ def main():
     load_data_path = Path(__file__).parent.parent.parent / Path('data') / Path('code_smell_data.jsonl')
     save_data_path = Path(__file__).parent / Path('results') / Path(f'code_smell_result_{model_abbr_mapping[args.model]}.jsonl')
 
-    dataset = load_dataset('json', split='train', data_files=str(load_data_path)).select(range(2))
+    dataset = load_dataset('json', split='train', data_files=str(load_data_path))
     dataset.cleanup_cache_files()
     print(dataset)
 
