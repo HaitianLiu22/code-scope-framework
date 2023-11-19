@@ -116,23 +116,32 @@ def code_repair():  # TODO code repair名字都错了
 
 
 def code_testing():
-    cs = load_dataset('json', split='train', data_files='code_review_data.jsonl')
-    gt = load_dataset('json', split='train', data_files='code_review_eval_human.jsonl')
-    print(cs)
-    print(gt)
+    new = load_dataset('json', split='train', data_files='automated_testing_data.jsonl')
+    old = load_dataset('json', split='train', data_files='repair_code_test_eval_wizardcoder.jsonl')
+    print(new)
+    print(old)
 
-    cs = cs.add_column('diff_tag', gt['diff_tag'])
-    cs = cs.add_column('review_comment', gt['review_comment'])
-    cs.to_json(str('code_review_data.jsonl'), lines=True)
+    new_code_uid = new['source_code']
+    old_code_uid = old['source_code']
 
-    cs_code_uid = cs['code_uid']
-    gt_code_uid = gt['code_uid']
+    print(new_code_uid == old_code_uid)
+    # print(new_code_uid[0])
+    # print(old_code_uid[0])
 
-    print(gt_code_uid == cs_code_uid)
-    print(gt_code_uid[0])
-    print(cs_code_uid[0])
+    new = new.add_column('predicted_testcases', old['hidden_unit_tests'])
+    new = new.add_column('predicted_pass_rate', old['pass_rate'])
+    new = new.add_column('predicted_line_coverage', old['line_coverage'])
+    new = new.add_column('predicted_branch_coverage', old['branch_coverage'])
+    print(new)
+
+    new.to_json(str('automated_testing_result_wizardcoder.jsonl'), lines=True)
 
     sys.exit()
+
+    # cs = cs.add_column('review_comment', gt['review_comment'])
+    # cs.to_json(str('code_review_data.jsonl'), lines=True)
+    #
+    # sys.exit()
 
     # gt = load_dataset('json', split='train', data_files='./raw/automated_testing_data.jsonl')
     # hh = load_dataset('json', split='train', data_files='./automated_testing_data.jsonl')
