@@ -1,14 +1,3 @@
-# Code Review Task
-
-## Feature Definitions
-
-- `id`:
-- `lang_cluster`:
-- `source_code`:
-- `diff_hunk`:
-- `diff_tag`:
-- `review_comment`:
-
 ## Code Review Task
 
 ### 0. Data
@@ -27,14 +16,14 @@ The code review dataset is at `data/code_review_data.jsonl`. We explain the fiel
 
 ### 1. Installation
 
-1. `cd code_smell`
+1. `cd code_review`
 2. install `python>=3.9` (we only guarantee the code works on python 3.9)
 3. install `torch` (we suggest `torch==2.1.1`) based on your cuda version
 4. `pip install -r requirements.txt`
 
 ### 2. Inference
 
-Run the inference scripts to get the inference results of the targeted LLMs. The inference results `code_smell_result_{model_name}.jsonl` will be saved under the `inference/results` folder. The inference logs `code_smell_log_{model_name}.log` will be saved under the `inference/logs` folder.
+Run the inference scripts to get the inference results of the targeted LLMs. The inference results `code_review_result_{model_name}.jsonl` will be saved under the `inference/results` folder. The inference logs `code_review_log_{model_name}.log` will be saved under the `inference/logs` folder.
 
 #### 2.1 Closed-sourced LLMs
 
@@ -68,4 +57,4 @@ For HuggingFace models, you can run the following command by replacing `huggingf
 
 ### 3. Evaluation
 
-Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_smell_score.json` will be saved under the `evaluator/scores` folder.
+Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_review_score.json` will be saved under the `evaluator/scores` folder.
