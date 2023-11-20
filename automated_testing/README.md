@@ -5,29 +5,29 @@
 The automated testing dataset is at `data/automated_testing_data.jsonl`. We explain the fields of the data below:
 
 
-|              Field              |                 Description                 |
-| :------------------------------: | :-----------------------------------------: |
-|                id                |    the local id of items in the dataset    |
-|           lang_cluster           | the programming language of the source code |
-|           source_code           |                                            |
-|             src_uid             |                                            |
-|           description           |                                            |
-|       input_specification       |                                            |
-|       output_specification       |                                            |
-|          sample_inputs          |                                            |
-|          sample_outputs          |                                            |
-|              notes              |                                            |
-|         human_testcases         |                                            |
-|         human_pass_rate         |                                            |
-|       human_line_coverage       |                                            |
-|      human_branch_coverage      |                                            |
-|    human_sample_testcases_1~5    |                                            |
-|    human_sample_pass_rate_1~5    |                                            |
-|  human_sample_line_coverage_1~5  |                                            |
-| human_sample_branch_coverage_1~5 |                                            |
-|      human_sample_pass_rate      |                                            |
-|    human_sample_line_coverage    |                                            |
-|   human_sample_branch_coverage   |                                            |
+|              Field              |                                                 Description                                                 |
+| :------------------------------: | :----------------------------------------------------------------------------------------------------------: |
+|                id                |                                     the local id of items in the dataset                                     |
+|           lang_cluster           |                                 the programming language of the source code                                 |
+|           source_code           |                                      the human-submitted code solution                                      |
+|             src_uid             |                                      the codeforce's id of the problem                                      |
+|           description           |                                             problem description                                             |
+|       input_specification       | how and in what order the input will be given to the program, also includes the date range, types, and sizes |
+|       output_specification       |                                      how the outputs should be printed                                      |
+|          sample_inputs          |                     sample inputs for theprogram that is expected to solve the problem                     |
+|          sample_outputs          |              the expected output for the sample inputs that is expected to solve the problem              |
+|              notes              |                              explanation of sample inputs and sample outputs                              |
+|         human_testcases         |                                           human-written testcases                                           |
+|         human_pass_rate         |                            pass rate of human-written testcases in source code                            |
+|       human_line_coverage       |                          line coverage of human-written testcases in source code                          |
+|      human_branch_coverage      |                         branch coverage of human-written testcases in source code                         |
+|    human_sample_testcases_1~5    |                                                                                                              |
+|    human_sample_pass_rate_1~5    |                                                                                                              |
+|  human_sample_line_coverage_1~5  |                                                                                                              |
+| human_sample_branch_coverage_1~5 |                                                                                                              |
+|      human_sample_pass_rate      |                                                                                                              |
+|    human_sample_line_coverage    |                                                                                                              |
+|   human_sample_branch_coverage   |                                                                                                              |
 
 ### 1. Installation
 
