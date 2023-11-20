@@ -1,24 +1,75 @@
-# Automated Testing Task
+## Automated Testing Task
 
-## Feature Definitions
+### 0. Data
 
-- `id`:  
-- `lang_cluster`: 
-- `source_code`: 
-- `description`: 
-- `input_specification`:
-- `output_specification`:
-- `sample_inputs`:
-- `sample_outputs`:
-- `notes`:
-- `human_testcases`:
-- `human_pass_rate`:
-- `human_line_coverage`:
-- `human_branch_coverage`:
-- `human_sample_testcases_1~5`:
-- `human_sample_pass_rate_1~5`:
-- `human_sample_line_coverage_1~5`:
-- `human_sample_branch_coverage_1~5`:
-- `human_sample_pass_rate`:
-- `human_sample_line_coverage`:
-- `human_sample_branch_coverage`:
+The automated testing dataset is at `data/automated_testing_data.jsonl`. We explain the fields of the data below:
+
+
+|              field              |                 description                 |
+| :------------------------------: | :-----------------------------------------: |
+|                id                |    the local id of items in the dataset    |
+|           lang_cluster           | the programming language of the source code |
+|           source_code           |                                            |
+|             src_uid             |                                            |
+|           description           |                                            |
+|       input_specification       |                                            |
+|       output_specification       |                                            |
+|          sample_inputs          |                                            |
+|          sample_outputs          |                                            |
+|              notes              |                                            |
+|         human_testcases         |                                            |
+|         human_pass_rate         |                                            |
+|       human_line_coverage       |                                            |
+|      human_branch_coverage      |                                            |
+|    human_sample_testcases_1~5    |                                            |
+|    human_sample_pass_rate_1~5    |                                            |
+|  human_sample_line_coverage_1~5  |                                            |
+| human_sample_branch_coverage_1~5 |                                            |
+|      human_sample_pass_rate      |                                            |
+|    human_sample_line_coverage    |                                            |
+|   human_sample_branch_coverage   |                                            |
+
+### 1. Installation
+
+1. `cd code_review`
+2. install `python>=3.9` (we only guarantee the code works on python 3.9)
+3. install `torch` (we suggest `torch==2.1.1`) based on your cuda version
+4. `pip install -r requirements.txt`
+
+### 2. Inference
+
+Run the inference scripts to get the inference results of the targeted LLMs. The inference results `code_review_result_{model_name}.jsonl` will be saved under the `inference/results` folder. The inference logs `code_review_log_{model_name}.log` will be saved under the `inference/logs` folder.
+
+#### 2.1 Closed-sourced LLMs
+
+We provide the following closed-sourced LLMs inference scripts for you:
+
+
+| Model Name | Model Version      | Script Name  |
+| ---------- | ------------------ | ------------ |
+| PaLM 2     | text-bison-001     | run_palm2.py |
+| GPT-4      | gpt-4-0613         | run_gpt.py   |
+| GPT-3.5    | gpt-3.5-turbo-0613 | run_gpt.py   |
+
+For PaLM 2, you can run the following command by replacing `google_api_key` with your own Google API key: `python inference/run_palm2.py --api_key google_api_key`
+
+For GPT, you can run the following command by replacing `openai_api_key` with your own OpenAI API key, `model_version` with specific model version: `python inference/run_gpt.py --api_key openai_api_key --model model_version`
+
+#### 2.2 Open-sourced LLMs
+
+We provide the following open-sourced LLMs inference scripts for you:
+
+
+| Model Name  | Model Checkpoint                    | Script Name        |
+| ----------- | ----------------------------------- | ------------------ |
+| Code LLaMA  | codellama/CodeLlama-34b-Instruct-hf | run_codellama.py   |
+| LLaMA 2     | meta-llama/Llama-2-70b-chat-hf      | run_llama2.py      |
+| StarCoder   | HuggingFaceH4/starchat-beta         | run_starcoder.py   |
+| Vicuna      | lmsys/vicuna-13b-v1.5-16k           | run_vicuna.py      |
+| WizardCoder | WizardLM/WizardCoder-15B-V1.0       | run_wizardcoder.py |
+
+For HuggingFace models, you can run the following command by replacing `huggingface_access_token` with your own HuggingFace access token, `cache_dir` with path to a directory in which a downloaded pretrained model and tokenizer should be cached, `model_checkpoint` with specific model checkpoint: `python inference/run_{model_name}.py --access_token huggingface_access_token --cache_dir cache_dir --checkpoint model_checkpoint`
+
+### 3. Evaluation
+
+Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_review_score_1.json` and `code_review_score_2.json` will be saved under the `evaluator/scores` folder.
