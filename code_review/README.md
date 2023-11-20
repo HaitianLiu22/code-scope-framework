@@ -57,4 +57,4 @@ For HuggingFace models, you can run the following command by replacing `huggingf
 
 ### 3. Evaluation
 
-Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_review_score.json` will be saved under the `evaluator/scores` folder.
+Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_review_score_1.json` and `code_review_score_2.json` will be saved under the `evaluator/scores` folder.
