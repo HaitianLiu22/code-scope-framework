@@ -56,8 +56,4 @@ For HuggingFace models, you can run the following command by replacing `huggingf
 
 ### 3. Evaluation
 
-
-### 3. Evaluation
-
-1. `cd ../evaluator`
-2. Run `python score_code_summarization.py --llm_infer_result infer_file` (replace "infer_file" with the llm's inference file name, eg. "code_summ_infer_palm.jsonl") to get the scores of the targeted llm's inference results, the scores will be palced at `evaluator/summ_scores/`.
+Run `evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_smell_score.json` will be saved under the `evaluator/scores` folder.
