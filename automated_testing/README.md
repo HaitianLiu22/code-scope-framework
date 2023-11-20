@@ -25,9 +25,9 @@ The automated testing dataset is at `data/automated_testing_data.jsonl`. We expl
 |    human_sample_pass_rate_1~5    |                    pass rate of sample human-written testcases in source code 5 times                    |
 |  human_sample_line_coverage_1~5  |                  line coverage of sample human-written testcases in source code 5 times                  |
 | human_sample_branch_coverage_1~5 |                 branch coverage of sample human-written testcases in source code 5 times                 |
-|      human_sample_pass_rate      |                                                                                                              |
-|    human_sample_line_coverage    |                                                                                                              |
-|   human_sample_branch_coverage   |                                                                                                              |
+|      human_sample_pass_rate      |                            average of 5 sample human-written testcases pass rate                            |
+|    human_sample_line_coverage    |                          average of 5 sample human-written testcases line coverage                          |
+|   human_sample_branch_coverage   |                         average of 5 sample human-written testcases branch coverage                         |
 
 ### 1. Installation
 
