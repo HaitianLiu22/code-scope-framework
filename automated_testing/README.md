@@ -21,10 +21,10 @@ The automated testing dataset is at `data/automated_testing_data.jsonl`. We expl
 |         human_pass_rate         |                            pass rate of human-written testcases in source code                            |
 |       human_line_coverage       |                          line coverage of human-written testcases in source code                          |
 |      human_branch_coverage      |                         branch coverage of human-written testcases in source code                         |
-|    human_sample_testcases_1~5    |                                                                                                              |
-|    human_sample_pass_rate_1~5    |                                                                                                              |
-|  human_sample_line_coverage_1~5  |                                                                                                              |
-| human_sample_branch_coverage_1~5 |                                                                                                              |
+|    human_sample_testcases_1~5    |                     5 testcases randomly selected among human-written testcases 5 times                     |
+|    human_sample_pass_rate_1~5    |                    pass rate of sample human-written testcases in source code 5 times                    |
+|  human_sample_line_coverage_1~5  |                  line coverage of sample human-written testcases in source code 5 times                  |
+| human_sample_branch_coverage_1~5 |                 branch coverage of sample human-written testcases in source code 5 times                 |
 |      human_sample_pass_rate      |                                                                                                              |
 |    human_sample_line_coverage    |                                                                                                              |
 |   human_sample_branch_coverage   |                                                                                                              |
