@@ -8,7 +8,7 @@ from datasets import load_dataset
 
 
 def main():
-    lang_cluster_list = ['C', 'C++', 'Java', 'Python']
+    lang_cluster_list = ['Python', 'Java', 'C', 'C++']
 
     load_result_name_list = [
         'automated_testing_result_codellama.jsonl',
