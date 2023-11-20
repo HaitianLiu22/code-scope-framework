@@ -16,15 +16,14 @@
 The code review dataset is at `data/code_review_data.jsonl`. We explain the fields of the data below:
 
 
-|     field     |                                                                        description                                                                        |
-| :------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|       id       |                                                           the local id of items in the dataset                                                           |
-|  lang_cluster  |                                                        the programming language of the source code                                                        |
-|  source_code  |                                                            code containing certain code smell                                                            |
-|   diff_hunk   |                                                                       code changes                                                                       |
-|    diff_tag    | <br />0: quality of code changes is good that no review comments required<br /><br />
-1: quality of code changes is poor that requires review comments. |
-| review_comment |                                                                      review_comment                                                                      |
+|                               field                               |                               description                               |
+|:-----------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+|                                id                                 |                  the local id of items in the dataset                   |
+|                           lang_cluster                            |               the programming language of the source code               |
+|                            source_code                            |                   code containing certain code smell                    |
+|                             diff_hunk                             |                              code changes                               |
+|                             diff_tag                              | 0: quality of code changes is good that no review comments required<br>1: quality of code changes is poor that requires review comments. |
+|                          review_comment                           |                             review_comment                              |
 
 ### 1. Installation
 
