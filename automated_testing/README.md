@@ -5,7 +5,7 @@
 The automated testing dataset is at `data/automated_testing_data.jsonl`. We explain the fields of the data below:
 
 
-|              field              |                 description                 |
+|              Field              |                 Description                 |
 | :------------------------------: | :-----------------------------------------: |
 |                id                |    the local id of items in the dataset    |
 |           lang_cluster           | the programming language of the source code |
