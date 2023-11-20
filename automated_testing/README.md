@@ -31,14 +31,16 @@ The automated testing dataset is at `data/automated_testing_data.jsonl`. We expl
 
 ### 1. Installation
 
-1. `cd code_review`
+1. `cd automated_testing`
 2. install `python>=3.9` (we only guarantee the code works on python 3.9)
-3. install `torch` (we suggest `torch==2.1.1`) based on your cuda version
-4. `pip install -r requirements.txt`
+3. install [GCC](https://linuxize.com/post/how-to-install-gcc-on-ubuntu-20-04/) on your Linux machine or [MinGW](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/) on your Windows machine
+4. install [Java8](https://www.oracle.com/java/technologies/downloads/#java8-linux) on your Linux machine or [Java8](https://www.oracle.com/java/technologies/downloads/#java8-windows) on your Windows machine
+5. install `torch` (we suggest `torch==2.1.1`) based on your cuda version
+6. `pip install -r requirements.txt`
 
 ### 2. Inference
 
-Run the inference scripts to get the inference results of the targeted LLMs. The inference results `code_review_result_{model_name}.jsonl` will be saved under the `inference/results` folder. The inference logs `code_review_log_{model_name}.log` will be saved under the `inference/logs` folder.
+Run the inference scripts to get the inference results of the targeted LLMs. The inference results `automated_testing_result_{model_name}.jsonl` will be saved under the `inference/results` folder. The inference logs `automated_testing_log_{model_name}.log` will be saved under the `inference/logs` folder.
 
 #### 2.1 Closed-sourced LLMs
 
@@ -72,4 +74,6 @@ For HuggingFace models, you can run the following command by replacing `huggingf
 
 ### 3. Evaluation
 
-Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `code_review_score_1.json` and `code_review_score_2.json` will be saved under the `evaluator/scores` folder.
+1. Run `python evaluator/test_codes.py` to parse the source codes into code files under `evaluator/codes` folder.
+2. Run `python evaluator/test_codes.py --result_name automated_testing_result_{model_name}.jsonl` to test the source codes using predicted testcases and obtain the corresponding pass rate, line coverage, branch coverage.
+3. Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `automated_testing_score.json` will be saved under the `evaluator/scores` folder.
