@@ -74,6 +74,6 @@ For HuggingFace models, you can run the following command by replacing `huggingf
 
 ### 3. Evaluation
 
-1. Run `python evaluator/test_codes.py` to parse the source codes into code files under `evaluator/codes` folder.
+1. Run `python evaluator/save_codes.py` to parse the source codes into code files under `evaluator/codes` folder.
 2. Run `python evaluator/test_codes.py --result_name automated_testing_result_{model_name}.jsonl` to test the source codes using predicted testcases and obtain the corresponding pass rate, line coverage, branch coverage.
 3. Run `python evaluator/score.py` to get the scores of the targeted LLMs' inference results. The scores `automated_testing_score.json` will be saved under the `evaluator/scores` folder.
