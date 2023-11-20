@@ -35,13 +35,9 @@ We provide the following closed-sourced LLMs inference scripts for you:
 | GPT-4      | gpt-4-0613         | run_gpt.py   |
 | GPT-3.5    | gpt-3.5-turbo-0613 | run_gpt.py   |
 
-For PaLM 2, you can run the following command by replacing `google_api_key` with your own Google API key.
+For PaLM 2, you can run the following command by replacing `google_api_key` with your own Google API key: `python inference/run_palm2.py --api_key google_api_key`
 
-`python inference/run_palm2.py --api_key google_api_key`
-
-For GPT, you can run the following command by replacing `openai_api_key` with your own OpenAI API key, `model_version` with specific model version.
-
-`python inference/run_gpt.py --api_key openai_api_key --model model_version`
+For GPT, you can run the following command by replacing `openai_api_key` with your own OpenAI API key, `model_version` with specific model version: `python inference/run_gpt.py --api_key openai_api_key --model model_version`
 
 #### 2.2 Open-sourced LLMs
 
@@ -56,9 +52,7 @@ We provide the following open-sourced LLMs inference scripts for you:
 | Vicuna      | lmsys/vicuna-13b-v1.5-16k           | run_vicuna.py      |
 | WizardCoder | WizardLM/WizardCoder-15B-V1.0       | run_wizardcoder.py |
 
-For HuggingFace models, you can run the following command by replacing `huggingface_access_token` with your own HuggingFace access token, `cache_dir` with path to a directory in which a downloaded pretrained model and tokenizer should be cached, `model_checkpoint` with specific model checkpoint.
-
-`python inference/run_{model_name}.py --access_token huggingface_access_token --cache_dir cache_dir --checkpoint model_checkpoint`
+For HuggingFace models, you can run the following command by replacing `huggingface_access_token` with your own HuggingFace access token, `cache_dir` with path to a directory in which a downloaded pretrained model and tokenizer should be cached, `model_checkpoint` with specific model checkpoint: `python inference/run_{model_name}.py --access_token huggingface_access_token --cache_dir cache_dir --checkpoint model_checkpoint`
 
 ### 3. Evaluation
 
