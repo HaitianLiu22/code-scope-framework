@@ -6,11 +6,12 @@ The code summarization dataset is at `data/code_summarization_data.jsonl`. We ex
 
 
 |    field    |                 description                 |
-| :----------: | :-----------------------------------------: |
-|      id      |    the local id of items in the dataset    |
-| source_code |                                            |
+| :----------: | :------------------------------------------: |
+|      id      |     the local id of items in the dataset     |
 | lang_cluster | the programming language of the source code |
-|              |                                            |
+| source_code |     code containing certain code smell     |
+|  smell_code  |   smelly code snippet in the source code   |
+|    smell    | code smell type of the smelly code snippet |
 
 ### 1. Installation
 
