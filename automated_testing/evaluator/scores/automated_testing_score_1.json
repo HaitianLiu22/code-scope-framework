@@ -2,6 +2,13 @@
   "code": 0,
   "data": [
     {
+      "model": "Human",
+      "short": "97.16",
+      "medium": "97.09",
+      "long": "94.47",
+      "overall": "96.24"
+    },
+    {
       "model": "GPT-3.5",
       "short": "87.49",
       "medium": "86.37",
@@ -21,13 +28,6 @@
       "medium": "80.48",
       "long": "80.27",
       "overall": "81.4"
-    },
-    {
-      "model": "Human",
-      "short": "82.65",
-      "medium": "79.34",
-      "long": "80.27",
-      "overall": "80.75"
     },
     {
       "model": "Code LLaMA",

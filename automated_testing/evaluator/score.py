@@ -141,13 +141,13 @@ def main():
                 for length, length_dataset in zip(length_list, length_dataset_list):
                     score_item['metrics'][lang_cluster.lower()][length] = {}
 
-                    pass_rate = round(float(np.mean(length_dataset['predicted_pass_rate'])), 2)
+                    pass_rate = round(float(np.mean(length_dataset['human_sample_pass_rate'])), 2)
                     score_item['metrics'][lang_cluster.lower()][length]['pass_rate'] = str(pass_rate)
 
-                    line_coverage = round(float(np.mean(length_dataset['predicted_line_coverage'])), 2)
+                    line_coverage = round(float(np.mean(length_dataset['human_sample_line_coverage'])), 2)
                     score_item['metrics'][lang_cluster.lower()][length]['line_coverage'] = str(line_coverage)
 
-                    branch_coverage = round(float(np.mean(length_dataset['predicted_branch_coverage'])), 2)
+                    branch_coverage = round(float(np.mean(length_dataset['human_sample_branch_coverage'])), 2)
                     score_item['metrics'][lang_cluster.lower()][length]['branch_coverage'] = str(branch_coverage)
 
             # 按长度计算各指标平均值
@@ -382,15 +382,15 @@ def main():
 
                 # 按长度统计指标
                 for length, length_dataset in zip(length_list, length_dataset_list):
-                    pass_rate = round(float(np.mean(length_dataset['predicted_pass_rate'])), 2)
+                    pass_rate = round(float(np.mean(length_dataset['human_sample_pass_rate'])), 2)
                     evaluation_metrics.append(pass_rate)
                     score_item[f'{lang_cluster.lower()}_{length}_pass_rate'] = str(pass_rate)
 
-                    line_coverage = round(float(np.mean(length_dataset['predicted_line_coverage'])), 2)
+                    line_coverage = round(float(np.mean(length_dataset['human_sample_line_coverage'])), 2)
                     evaluation_metrics.append(line_coverage)
                     score_item[f'{lang_cluster.lower()}_{length}_line_coverage'] = str(line_coverage)
 
-                    branch_coverage = round(float(np.mean(length_dataset['predicted_branch_coverage'])), 2)
+                    branch_coverage = round(float(np.mean(length_dataset['human_sample_branch_coverage'])), 2)
                     evaluation_metrics.append(branch_coverage)
                     score_item[f'{lang_cluster.lower()}_{length}_branch_coverage'] = str(branch_coverage)
 
