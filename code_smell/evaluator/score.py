@@ -1,7 +1,5 @@
-import sys
 import json
 import warnings
-
 import tiktoken
 import numpy as np
 
@@ -149,32 +147,17 @@ def main():
         # 按长度计算各指标平均值
         evaluation_metrics = []
         for length in length_list:
-            accuracy_list = []
-            precision_list = []
-            recall_list = []
-            f1_list = []
+            length_metrics = []
 
             for lang_cluster in lang_cluster_list:
-                accuracy_list.append(float(score_item['metrics'][lang_cluster.lower()][length]['accuracy']))
-                precision_list.append(float(score_item['metrics'][lang_cluster.lower()][length]['precision']))
-                recall_list.append(float(score_item['metrics'][lang_cluster.lower()][length]['recall']))
-                f1_list.append(float(score_item['metrics'][lang_cluster.lower()][length]['f1']))
+                length_metrics.append(float(score_item['metrics'][lang_cluster.lower()][length]['accuracy']))
+                length_metrics.append(float(score_item['metrics'][lang_cluster.lower()][length]['precision']))
+                length_metrics.append(float(score_item['metrics'][lang_cluster.lower()][length]['recall']))
+                length_metrics.append(float(score_item['metrics'][lang_cluster.lower()][length]['f1']))
 
-            accuracy = round(float(np.mean(accuracy_list)), 2)
-            evaluation_metrics.append(accuracy)
-            score_item[f'{length}_accuracy'] = str(accuracy)
-
-            precision = round(float(np.mean(precision_list)), 2)
-            evaluation_metrics.append(precision)
-            score_item[f'{length}_precision'] = str(precision)
-
-            recall = round(float(np.mean(recall_list)), 2)
-            evaluation_metrics.append(recall)
-            score_item[f'{length}_recall'] = str(recall)
-
-            f1 = round(float(np.mean(f1_list)), 2)
-            evaluation_metrics.append(f1)
-            score_item[f'{length}_f1'] = str(f1)
+            length_score = round(float(np.mean(length_metrics)), 2)
+            evaluation_metrics.append(length_score)
+            score_item[f'{length}'] = str(length_score)
 
         print(score_item)
         overall_score = round(float(np.mean(evaluation_metrics)), 2)
@@ -189,7 +172,7 @@ def main():
     score_dir = Path(__file__).parent / Path('scores')
     if not score_dir.is_dir():
         score_dir.mkdir(parents=True, exist_ok=True)
-    save_score_path = score_dir / Path('code_smell_score_2.json')
+    save_score_path = score_dir / Path('code_smell_score_1.json')
     with open(str(save_score_path), mode='w', encoding='utf-8') as file:
         json.dump(score_dict, file, ensure_ascii=False, indent=2)
 
@@ -211,11 +194,11 @@ def main():
         for lang_cluster, lang_cluster_dataset in zip(lang_cluster_list, lang_cluster_dataset_list):
             tokens = lang_cluster_dataset['tokens']
 
-            import matplotlib.pyplot as plt
-            sorted_tokens = sorted(tokens)
-            print(sorted_tokens)
-            plt.bar(range(len(sorted_tokens)), sorted_tokens)
-            plt.show()
+            # import matplotlib.pyplot as plt
+            # sorted_tokens = sorted(tokens)
+            # print(sorted_tokens)
+            # plt.bar(range(len(sorted_tokens)), sorted_tokens)
+            # plt.show()
 
             # 排除每种语言的长度离群值
             if lang_cluster == 'Java':
@@ -300,7 +283,7 @@ def main():
     score_dir = Path(__file__).parent / Path('scores')
     if not score_dir.is_dir():
         score_dir.mkdir(parents=True, exist_ok=True)
-    save_score_path = score_dir / Path('code_smell_score_3.json')
+    save_score_path = score_dir / Path('code_smell_score_2.json')
     with open(str(save_score_path), mode='w', encoding='utf-8') as file:
         json.dump(score_dict, file, ensure_ascii=False, indent=2)
 
