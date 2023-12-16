@@ -33,14 +33,14 @@ def update_metrics(example):
 
 def main():
     load_data_name_list = [
-        'code_summarization_data.jsonl',
+        # 'code_summarization_data.jsonl',
         'code_smell_data.jsonl',
         'code_review_data.jsonl',
         'automated_testing_data.jsonl',
         'program_synthesis_data.jsonl',
         'code_translation_data.jsonl',
         'code_repair_data.jsonl',
-        'code_optimization_data.jsonl'
+        # 'code_optimization_data.jsonl'
     ]
 
     lang_cluster_mapping = {
@@ -60,18 +60,18 @@ def main():
         'rust': 'Rust'
     }
 
-    length_mapping = {
-        'code_summarization_data.jsonl': 4841,
-        'code_smell_data.jsonl': 200,
-        'code_review_data.jsonl': 900,
-        'automated_testing_data.jsonl': 400,
-        'program_synthesis_data.jsonl': 803,
-        'code_translation_data.jsonl': 5382,
-        'code_repair_data.jsonl': 746,
-        'code_optimization_data.jsonl': 121
-    }
+    # length_mapping = {
+    #     'code_summarization_data.jsonl': 4841,
+    #     'code_smell_data.jsonl': 200,
+    #     'code_review_data.jsonl': 900,
+    #     'automated_testing_data.jsonl': 400,
+    #     'program_synthesis_data.jsonl': 803,
+    #     'code_translation_data.jsonl': 5382,
+    #     'code_repair_data.jsonl': 746,
+    #     'code_optimization_data.jsonl': 121
+    # }
 
-    previous_length_list = []
+    #previous_length_list = []
     for index, load_data_name in enumerate(load_data_name_list):
         load_data_path = Path(__file__).parent.parent / Path('raw') / Path(load_data_name)
         save_data_path = Path(__file__).parent.parent / Path('data') / Path(load_data_name)
@@ -79,10 +79,13 @@ def main():
         dataset.cleanup_cache_files()
         print(dataset)
 
-        if index != 0:
-            previous_length_list.append(length_mapping[load_data_name_list[index - 1]])
-        current_length = length_mapping[load_data_name]
-        id_list = [_ + 1 for _ in range(np.sum(previous_length_list).astype(int), np.sum(previous_length_list).astype(int) + current_length)]
+        # if index != 0:
+        #     previous_length_list.append(length_mapping[load_data_name_list[index - 1]])
+        # current_length = length_mapping[load_data_name]
+        # id_list = [_ + 1 for _ in range(np.sum(previous_length_list).astype(int), np.sum(previous_length_list).astype(int) + current_length)]
+
+        id_list = [_ + 1 for _ in range(len(dataset))]
+        print(id_list)
         dataset = dataset.add_column('id', id_list)
 
         if load_data_name == 'code_summarization_data.jsonl':
